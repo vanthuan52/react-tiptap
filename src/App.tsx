@@ -1,13 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TiptapEditorExample from "./features/tiptap-editor-demo/editor-example";
+import Header from "./features/tiptap-editor-demo/components/header";
+import EditPage from "./features/tiptap-editor-demo/pages/edit-page";
+import PreviewPage from "./features/tiptap-editor-demo/pages/preview-page";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50 text-gray-900 font-sans antialiased">
-        <Routes>
-          <Route path="/" element={<TiptapEditorExample />} />
-        </Routes>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<EditPage />} />
+            <Route path="/preview" element={<PreviewPage />} />
+          </Routes>
+        </main>
       </div>
     </BrowserRouter>
   );

@@ -1,17 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
 // @ts-ignore
-import '@fontsource/lexend';
+import "@fontsource/lexend";
 // @ts-ignore
-import '@fontsource/geist-sans';
+import "@fontsource/geist-sans";
 // @ts-ignore
-import '@fontsource/geist-mono';
-import './styles/globals.css'
-import './features/tiptap-editor/styles/index.css'
-import App from './App.tsx'
+import "@fontsource/geist-mono";
+import "./styles/globals.css";
+import "./features/tiptap-editor/styles/index.css";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
   </StrictMode>,
-)
+);
