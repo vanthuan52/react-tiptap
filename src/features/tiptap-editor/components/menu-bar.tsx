@@ -5,7 +5,6 @@ import BulletListButton from "./controls/bullet-list-button";
 import EmojiPopover from "./controls/emoji-popover";
 import HeadingDropdown from "./controls/heading-dropdown";
 import ImageButton from "./controls/image-button";
-import CloudinaryImageButton from "./controls/cloudinary-image-button";
 import InsertDropdown from "./controls/insert-dropdown";
 import ItalicButton from "./controls/italic-button";
 import LinkButton from "./controls/link-button";
@@ -71,7 +70,6 @@ export const MenuBar = () => {
 
       <ToolbarGroup>
         <ImageButton />
-        <CloudinaryImageButton />
         <YoutubeButton />
       </ToolbarGroup>
 

@@ -15,6 +15,13 @@ export const Image = TiptapImage.extend({
         parseHTML: (element: HTMLElement) => element.getAttribute("alt"),
         renderHTML: (attrs) => (attrs.alt ? { alt: attrs.alt } : {}),
       },
+      mediaKey: {
+        default: null,
+        parseHTML: (element: HTMLElement) =>
+          element.getAttribute("data-media-key"),
+        renderHTML: (attrs) =>
+          attrs.mediaKey ? { "data-media-key": attrs.mediaKey } : {},
+      },
       caption: {
         default: null,
         parseHTML: (element: HTMLElement) => {

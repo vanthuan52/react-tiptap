@@ -10,6 +10,7 @@ export type ImageAttributes = {
   width?: number;
   height?: number;
   caption?: string;
+  mediaKey?: string;
 };
 
 export type ImageData = ImageAttributes & {
@@ -55,6 +56,7 @@ export function getCurrentImageData(editor: Editor | null): ImageData | null {
     alt: node.attrs.alt || "",
     width: node.attrs.width,
     height: node.attrs.height,
+    mediaKey: node.attrs.mediaKey,
     // hasCaption: editor.isActive("imageFigure"),
     hasCaption: node.attrs.caption !== null,
     caption: node.attrs.caption,

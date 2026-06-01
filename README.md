@@ -41,21 +41,36 @@ npm run preview  # Preview production build
 npm run lint     # Run ESLint
 ```
 
-## Cloudinary (optional)
+## Image uploads
 
-Create `.env` (or `.env.local`) from `.env.example`:
+The base editor does not ship with a storage provider. By default, selecting an
+image inserts a local blob URL for preview. In production, pass your own
+`onImageUpload` or `onImageSelect` adapter and return the stored image URL.
 
-```env
-VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
-VITE_CLOUDINARY_API_KEY=your_api_key
-VITE_CLOUDINARY_API_SECRET=your_api_secret
-VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
+`mediaKey` is optional metadata for your storage layer, such as an S3 object key.
+
+```tsx
+<TiptapEditor
+  onImageUpload={async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await res.json();
+
+    return {
+      url: data.url,
+      width: data.width,
+      height: data.height,
+      alt: data.alt,
+      mediaKey: data.mediaKey,
+    };
+  }}
+/>
 ```
-
-Notes:
-
-- The media library reads Cloudinary config from `src/configs/app.config.ts`.
-- If you use Cloudinary asset listing/upload from the editor dialog, provide your own API endpoints compatible with `GET /api/images` and `POST /api/images`.
 
 ## Integration
 

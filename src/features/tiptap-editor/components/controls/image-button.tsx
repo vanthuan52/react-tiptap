@@ -16,7 +16,13 @@ const ImageButton = () => {
     if (onImageSelect) {
       const result = await onImageSelect();
       if (result) {
-        insert({ src: result.url, alt: result.alt, width: result.width, height: result.height });
+        insert({
+          src: result.url,
+          alt: result.alt,
+          width: result.width,
+          height: result.height,
+          mediaKey: result.mediaKey,
+        });
       }
       return;
     }
@@ -35,7 +41,13 @@ const ImageButton = () => {
       if (onImageUpload) {
         try {
           const result = await onImageUpload(file);
-          insert({ src: result.url, alt: result.alt ?? file.name, width: result.width, height: result.height });
+          insert({
+            src: result.url,
+            alt: result.alt ?? file.name,
+            width: result.width,
+            height: result.height,
+            mediaKey: result.mediaKey,
+          });
         } catch (err) {
           console.error("[TiptapEditor] onImageUpload failed:", err);
         }

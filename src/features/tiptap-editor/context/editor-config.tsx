@@ -11,6 +11,7 @@ export type ImageUploadResult = {
   width?: number;
   height?: number;
   alt?: string;
+  mediaKey?: string;
 };
 
 export type EditorConfig = {
@@ -32,7 +33,7 @@ export type EditorConfig = {
 
   /**
    * Called when user clicks the Image toolbar button.
-   * Override to open your own image picker UI (e.g. media library, Cloudinary, S3 browser...).
+   * Override to open your own image picker UI (e.g. media library or S3 browser).
    * Should return the chosen image info, or null if cancelled.
    *
    * If provided, this takes priority over the local file picker.

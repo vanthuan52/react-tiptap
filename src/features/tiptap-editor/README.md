@@ -133,6 +133,22 @@ export default function Page() {
 | `onImageUpload` | `(file: File) => Promise<ImageUploadResult>` | — | Upload handler |
 | `onImageSelect` | `() => Promise<ImageUploadResult \| null>` | — | Media picker handler |
 
+### ImageUploadResult
+
+```ts
+type ImageUploadResult = {
+  url: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+  mediaKey?: string;
+};
+```
+
+`mediaKey` is optional storage metadata. Use it for values like an S3 object key,
+asset id, or any identifier your backend needs later. When present, it is stored
+on the image node and rendered as `data-media-key`.
+
 ### Ref
 
 ```tsx
@@ -149,6 +165,10 @@ editorRef.current?.commands.focus();
 
 **Priority**: `onImageSelect` > `onImageUpload` > local blob URL (default)
 
+The module intentionally does not include a storage provider. The default local
+blob URL is useful for previews only; production apps should provide an upload
+or picker adapter.
+
 ### Upload to server
 
 ```tsx
@@ -158,7 +178,13 @@ editorRef.current?.commands.focus();
     formData.append("file", file);
     const res = await fetch("/api/upload", { method: "POST", body: formData });
     const data = await res.json();
-    return { url: data.url, alt: data.alt, width: data.width, height: data.height };
+    return {
+      url: data.url,
+      alt: data.alt,
+      width: data.width,
+      height: data.height,
+      mediaKey: data.mediaKey,
+    };
   }}
 />
 ```
@@ -169,7 +195,14 @@ editorRef.current?.commands.focus();
 <TiptapEditor
   onImageSelect={async () => {
     const image = await openMyMediaLibrary();
-    return image ? { url: image.url, width: image.width, height: image.height } : null;
+    return image
+      ? {
+          url: image.url,
+          width: image.width,
+          height: image.height,
+          mediaKey: image.mediaKey,
+        }
+      : null;
   }}
 />
 ```

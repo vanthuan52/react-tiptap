@@ -19,6 +19,7 @@ declare module "@tiptap/core" {
         width?: number;
         height?: number;
         caption?: string;
+        mediaKey?: string;
       }) => ReturnType;
       imageToFigure: () => ReturnType;
       figureToImage: () => ReturnType;
